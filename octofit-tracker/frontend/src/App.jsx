@@ -1,4 +1,5 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
+import { apiUrl } from './config/api'
 import './App.css'
 
 function Home() {
@@ -11,7 +12,7 @@ function Home() {
           and competing on a live leaderboard.
         </p>
         <div className="d-flex gap-3">
-          <a className="btn btn-primary btn-lg" href="http://localhost:8000/api/health">
+          <a className="btn btn-primary btn-lg" href={`${apiUrl}/health`}>
             Check API
           </a>
           <a className="btn btn-outline-secondary btn-lg" href="http://localhost:5173">
