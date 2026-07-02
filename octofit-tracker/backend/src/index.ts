@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
+import { connectDatabase } from './config/database';
 import { User } from './models/user';
 import { Team } from './models/team';
 import { Activity } from './models/activity';
@@ -8,7 +8,6 @@ import { Workout } from './models/workout';
 
 const app = express();
 const port = Number(process.env.PORT || 8000);
-const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 const codespaceName = process.env.CODESPACE_NAME;
 const apiUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
@@ -92,8 +91,7 @@ const seedData = async () => {
   }
 };
 
-mongoose
-  .connect(mongoUri)
+connectDatabase()
   .then(async () => {
     await seedData();
     console.log('Connected to MongoDB');

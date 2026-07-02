@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import { connectDatabase, disconnectDatabase } from '../config/database';
 import { User } from '../models/user';
 import { Team } from '../models/team';
 import { Activity } from '../models/activity';
@@ -7,8 +7,7 @@ import { Workout } from '../models/workout';
 
 // Seed the octofit_db database with test data
 async function seed() {
-  const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
-  await mongoose.connect(mongoUri);
+  await connectDatabase();
 
   await Promise.all([
     User.deleteMany({}),
@@ -86,7 +85,7 @@ async function seed() {
   ]);
 
   console.log(`Seeded ${users.length} users, ${teams.length} teams, activities, leaderboard entries, and workouts.`);
-  await mongoose.disconnect();
+  await disconnectDatabase();
 }
 
 seed().catch((error) => {
