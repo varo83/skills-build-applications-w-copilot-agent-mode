@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import mongoose from 'mongoose';
 import { connectDatabase } from './config/database';
 import { User } from './models/user';
 import { Team } from './models/team';
